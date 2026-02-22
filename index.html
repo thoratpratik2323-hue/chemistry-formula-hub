@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Formula Hub | Master Revision Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.82);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --chapter-sol: #0ea5e9;
+            --chapter-elec: #f59e0b;
+            --chapter-kin: #8b5cf6;
+            --chapter-org: #10b981;
+        }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .formula-hub-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .hub-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hub-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--chapter-sol), var(--chapter-elec), var(--chapter-kin), var(--chapter-org));
+        }
+
+        .hub-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .hub-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .search-wrapper {
+            margin-top: 2.5rem;
+            position: relative;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            padding-left: 3.5rem;
+            border-radius: 99px;
+            border: 2px solid var(--border-color);
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.12);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chapter-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1.5px solid #f1f5f9;
+        }
+
+        .chapter-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .chapter-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .formula-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 20px;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .formula-item:hover {
+            background: white;
+            border-color: var(--primary);
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .formula-name {
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .formula-math {
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 1.25rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            color: var(--text-main);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f1f5f9;
+        }
+
+        .formula-note {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-style: normal;
+            border-left: 3px solid var(--border-color);
+            padding-left: 0.75rem;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 21rem;
+            background: white;
+            padding: 0.85rem 1.75rem;
+            border-radius: 99px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 1400px) {
+            .back-link {
+                left: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hub-title {
+                font-size: 2.5rem;
+            }
+
+            .formula-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hub-header {
+                padding: 3rem 1rem;
+            }
+
+            .back-link {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <a href="index.html" class="back-link">
+        <span>←</span> Back to Test
+    </a>
+
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"
+            style="background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0) 70%);"></div>
+    </div>
+
+    <div class="formula-hub-container">
+        <header class="hub-header">
+            <h1 class="hub-title">The Master Formula Hub</h1>
+            <p class="hub-subtitle">Suno Ishu, ye revision sheet specially tumhare liye h. Isme Class 12 Boards ke saare
+                important formulas cover kiye hain. All the best, my genius! ❤️</p>
+
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchFormula"
+                    placeholder="Search for a topic (e.g. Nernst, Molality, CFT)...">
+            </div>
+        </header>
+
+        <div class="formula-grid" id="formulaGrid">
+            <!-- Solutions Card -->
+            <div class="chapter-card" data-chapter="solutions">
+                <div class="chapter-title-wrapper">
+                    <div class="chapter-icon" style="background: var(--chapter-sol);">💧</div>
+                    <h2 class="chapter-title">Solutions</h2>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Mole Fraction (\(\chi\))</span>
+                    <div class="formula-math">\(\chi_A = \frac{n_A}{n_A + n_B} \quad | \quad \sum \chi = 1\)</div>
+                    <p class="formula-note">Dhyan rakhna Ishu, sum hamesha 1 hi hoga.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Molarity vs Molality</span>
+                    <div class="formula-math">\(M = \frac{n}{V_{(L)}} \quad | \quad m = \frac{n}{W_{solvent(kg)}}\)
+                    </div>
+                    <p class="formula-note">Molarity temperature pe depend karti h, molality nahi!</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Henry's Law</span>
+                    <div class="formula-math">\(P = K_H \cdot \chi\)</div>
+                    <p class="formula-note">Solubility of gas in liquid.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Raoult's Law</span>
+                    <div class="formula-math">\(\frac{P^0_1 - P_1}{P^0_1} = i \cdot \chi_2\)</div>
+                    <p class="formula-note">Relative lowering of vapor pressure (RLVP).</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Colligative Properties</span>
+                    <div class="formula-math">\(\Delta T_b = i K_b m \quad | \quad \Delta T_f = i K_f m\)</div>
+                    <p class="formula-note">Elevation of BP & Depression of FP.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Osmotic Pressure (\(\pi\))</span>
+                    <div class="formula-math">\(\pi = i CRT\)</div>
+                    <p class="formula-note">The most important property for Boards calculations.</p>
+                </div>
+            </div>
+
+            <!-- Electrochemistry Card -->
+            <div class="chapter-card" data-chapter="electrochemistry">
+                <div class="chapter-title-wrapper">
+                    <div class="chapter-icon" style="background: var(--chapter-elec);">⚡</div>
+                    <h2 class="chapter-title">Electrochemistry</h2>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Nernst Equation</span>
+                    <div class="formula-math">\(E_{cell} = E^0_{cell} - \frac{0.059}{n} \log \frac{[Anode]}{[Cathode]}\)
+                    </div>
+                    <p class="formula-note">Always check 'n' (number of electrons exchanged).</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Gibbs Energy & Equilibrium</span>
+                    <div class="formula-math">\(\Delta G^0 = -nFE^0_{cell} = -2.303 RT \log K_c\)</div>
+                    <p class="formula-note">Spontaneous reaction ke liye \(\Delta G\) negative hota h.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Molar Conductivity (\(\Lambda_m\))</span>
+                    <div class="formula-math">\(\Lambda_m = \frac{\kappa \times 1000}{M} \quad | \quad \kappa = G \cdot
+                        \frac{l}{A}\)</div>
+                    <p class="formula-note">Units dhyan se: \(S \, cm^2 mol^{-1}\).</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Kohlrausch's Law</span>
+                    <div class="formula-math">\(\Lambda^0_m = \nu_+ \lambda^0_+ + \nu_- \lambda^0_-\)</div>
+                    <p class="formula-note">Infinite dilution pe har ion ki conductivity.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Faraday's Laws</span>
+                    <div class="formula-math">\(w = ZIt = \frac{E}{F} \cdot It \quad | \quad \frac{w_1}{w_2} =
+                        \frac{E_1}{E_2}\)</div>
+                    <p class="formula-note">1 Faraday = 96500 C approx.</p>
+                </div>
+            </div>
+
+            <!-- Chemical Kinetics Card -->
+            <div class="chapter-card" data-chapter="kinetics">
+                <div class="chapter-title-wrapper">
+                    <div class="chapter-icon" style="background: var(--chapter-kin);">⏱️</div>
+                    <h2 class="chapter-title">Chemical Kinetics</h2>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Zero Order</span>
+                    <div class="formula-math">\(kt = [R]_0 - [R] \quad | \quad t_{1/2} = \frac{[R]_0}{2k}\)</div>
+                    <p class="formula-note">Rate concentration pe depend nahi karta.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">First Order</span>
+                    <div class="formula-math">\(k = \frac{2.303}{t} \log \frac{[R]_0}{[R]} \quad | \quad t_{1/2} =
+                        \frac{0.693}{k}\)</div>
+                    <p class="formula-note">Board exams ka sabse favorite formula!</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Arrhenius Equation</span>
+                    <div class="formula-math">\(\log \frac{k_2}{k_1} = \frac{E_a}{2.303 R} \left[ \frac{T_2 - T_1}{T_1
+                        T_2} \right]\)</div>
+                    <p class="formula-note">Temperature change se rate constant kitna badlega.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Collision Theory</span>
+                    <div class="formula-math">\(k = P \cdot Z_{AB} \cdot e^{-E_a/RT}\)</div>
+                    <p class="formula-note">P is steric factor (proper orientation).</p>
+                </div>
+            </div>
+
+            <!-- Inorganic/Coordination Card -->
+            <div class="chapter-card" data-chapter="coordination">
+                <div class="chapter-title-wrapper">
+                    <div class="chapter-icon" style="background: var(--chapter-org);">💠</div>
+                    <h2 class="chapter-title">Coordination</h2>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Magnetic Moment (\(\mu\))</span>
+                    <div class="formula-math">\(\mu = \sqrt{n(n+2)} \, BM\)</div>
+                    <p class="formula-note">n = no. of unpaired electrons. Units: Bohr Magneton.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">CFT Splitting (\(\Delta_o\))</span>
+                    <div class="formula-math">\(CFSE = [-0.4x + 0.6y]\Delta_o + mP\)</div>
+                    <p class="formula-note">Octahedral field mein d-orbitals ka splitting.</p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">EAN (Effective Atomic No)</span>
+                    <div class="formula-math">\(EAN = Z - (ON) + 2(CN)\)</div>
+                    <p class="formula-note">Stability check karne ke liye kaam aata h.</p>
+                </div>
+            </div>
+
+            <!-- Organic Notes Card -->
+            <div class="chapter-card" data-chapter="organic">
+                <div class="chapter-title-wrapper">
+                    <div class="chapter-icon" style="background: var(--chapter-org);">🌿</div>
+                    <h2 class="chapter-title">Organic Revision</h2>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Essential Named Reactions</span>
+                    <p class="formula-note">
+                        • <b>Aldol:</b> Dilute NaOH, Alpha-H required.<br>
+                        • <b>Cannizzaro:</b> Conc. NaOH, No Alpha-H.<br>
+                        • <b>Reimer-Tiemann:</b> Phenol to Salicylaldehyde.<br>
+                        • <b>Kolbe's:</b> Phenol to Salicylic acid.
+                    </p>
+                </div>
+
+                <div class="formula-item">
+                    <span class="formula-name">Distinction Tests</span>
+                    <p class="formula-note">
+                        • <b>Lucas (Alcohols):</b> 3° > 2° > 1°.<br>
+                        • <b>Iodoform:</b> Methyl ketones & specific alcohols.<br>
+                        • <b>Tollen's:</b> Silver mirror for Aldehydes only.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="app-footer"
+        style="text-align: center; padding: 3rem; margin-top: 2rem; border-top: 1px solid var(--border-color); background: white;">
+        <p style="font-weight: 600; color: var(--text-main);">Created with ❤️ by Pratik for his beloved Ishika.</p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Padho aur phod do Boards mein! ✨
+        </p>
+    </footer>
+
+    <script>
+        // Smooth Search Logic
+        const searchInput = document.getElementById('searchFormula');
+        const cards = document.querySelectorAll('.chapter-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+
+            cards.forEach(card => {
+                const chapterName = card.dataset.chapter.toLowerCase();
+                const content = card.innerText.toLowerCase();
+
+                if (chapterName.includes(term) || content.includes(term)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.4s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
